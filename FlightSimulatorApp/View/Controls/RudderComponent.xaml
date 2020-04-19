@@ -21,7 +21,7 @@
                 </local:Sliders>
 
             </Canvas>
-            <local:Joystick x:Name="joystick" RenderTransformOrigin="0.5,0.5" Canvas.Left="-111" Canvas.Top="72">
+            <local:Joystick x:Name="Joystick" RenderTransformOrigin="0.5,0.5" Canvas.Left="-111" Canvas.Top="72">
                 <local:Joystick.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.45" ScaleY="0.45"/>

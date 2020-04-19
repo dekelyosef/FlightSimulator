@@ -53,18 +53,9 @@ namespace FlightSimulatorApp.ViewModel
                 Model.Rudder = value;
                 //send the new rudder value
                 string path = "set /controls/flight/rudder " + value.ToString("N5");
-                try
-                {
-                    string num = Model.ManualSend(path + " \n");
-                    if (Double.TryParse(num, out double val))
-                    {
-                        Model.Rudder = val;
-                    }
-                }
-                catch (Exception)
-                {
-                    Model.AddStatement("Failed to read Ruedder value from simulator");
-                }
+
+                Model.PushMessage(path + " \n");
+
             }
         }
 
@@ -79,18 +70,9 @@ namespace FlightSimulatorApp.ViewModel
                 Model.Elevator = value;
                 //send the new elevator value
                 string path = "set /controls/flight/elevator " + value.ToString("N5");
-                try
-                {
-                    string num = Model.ManualSend(path + " \n");
-                    if (Double.TryParse(num, out double val))
-                    {
-                        Model.Elevator = val;
-                    }
-                }
-                catch (Exception)
-                {
-                    Model.AddStatement("Failed to read Elevator value from simulator");
-                }
+
+                Model.PushMessage(path + " \n");
+
             }
         }
     }

@@ -14,7 +14,11 @@ namespace FlightSimulatorApp.View.Controls
         public RudderComponent()
         {
             InitializeComponent();
-            DataContext = (Application.Current as App).RudderViewModel;
+            MySliders.DataContext = (Application.Current as App).SliderViewModel;
+            Joystick.DataContext = (Application.Current as App).JoystickViewModel;
+            RudderVal.DataContext = (Application.Current as App).JoystickViewModel;
+            ElevatorVal.DataContext = (Application.Current as App).JoystickViewModel;
+
         }
     }
 }

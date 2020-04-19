@@ -48,7 +48,9 @@ namespace FlightSimulatorApp.ViewModel
             this.Model.Connect();
             if (this.Model.IsConnect())
             {
+                //start threads in charge of sending set and get requests
                 this.Model.Start();
+                this.Model.SendToSimulator();
                 return true;
             }
             return false;

@@ -16,7 +16,7 @@
         <Canvas Margin="10,10,10,10" Background="#FFDCE2EA">
             <Canvas x:Name="MenuBase" Margin="0" Background="#FFDCE2EA">
 
-                <Label x:Name="Headline" Content="Flight Gear Controller" FontSize="30" FontWeight="ExtraBlack" FontStyle="Oblique" Canvas.Left="200" Canvas.Top="30"/>
+                <Label x:Name="Headline" Content="Flight Gear Controller" FontSize="30" FontWeight="ExtraBlack" Canvas.Left="200" Canvas.Top="30"/>
 
                 <Button x:Name="Connect" Cursor ="Hand" Content="CONNECT" FontSize="16" FontWeight="Bold" BorderBrush="Black" Canvas.Left="525" Canvas.Top="117" Width="144" Height="41" Background="#FFC7C6C6"
                         Click="Connect_Click"/>

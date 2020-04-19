@@ -50,10 +50,8 @@ namespace FlightSimulatorApp.Model
          **/
         public string Read()
         {
-
             lock (lockObj)
             {
-
                 byte[] bytes = new byte[1024];
                 int bytesRead = this.stream.Read(bytes, 0, bytes.Length);
                 return Encoding.ASCII.GetString(bytes, 0, bytesRead);
@@ -65,7 +63,6 @@ namespace FlightSimulatorApp.Model
          **/
         public void Write(string command)
         {
-            //mutex lock
             lock (lockObj)
             {
                 //convert the command string to an array of bytes and sent to the server
