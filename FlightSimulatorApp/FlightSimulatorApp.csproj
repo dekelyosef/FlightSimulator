@@ -73,7 +73,6 @@
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MapViewModel.cs" />
-    <Compile Include="ViewModel\RudderCompViewModel.cs" />
     <Compile Include="ViewModel\SliderViewModel.cs" />
     <Compile Include="View\Controls\ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>

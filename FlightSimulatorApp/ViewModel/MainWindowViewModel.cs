@@ -77,5 +77,14 @@ namespace FlightSimulatorApp.ViewModel
                 Model.NoteColor = value;
             }
         }
+        
+        public string VM_Headline
+        {
+            get { return Model.Headline; }
+            set
+            {
+                Model.Headline = value;
+            }
+        }
     }
 }

@@ -49,24 +49,13 @@ namespace FlightSimulatorApp.ViewModel
          **/
         public double VM_Aileron
         {
-            get { return Model.Aileron; }
+            get { return (double)System.Math.Round(Model.Aileron, 3); }
             set
             {
                 Model.Aileron = value;
                 //send the new aileron value
                 string path = "set /controls/flight/aileron " + value.ToString("N5");
-                try
-                {
-                    string num = Model.ManualSend(path + " \n");
-                    if (Double.TryParse(num, out double val))
-                    {
-                        Model.Aileron = val;
-                    }
-                }
-                catch (Exception)
-                {
-                    Model.AddStatement("Failed to read Ailron value from simulator");
-                }
+                Model.PushMessage(path + " \n");
             }
         }
 
@@ -75,24 +64,13 @@ namespace FlightSimulatorApp.ViewModel
          **/
         public double VM_Throttle
         {
-            get { return Model.Throttle; }
+            get { return (double)System.Math.Round(Model.Throttle, 3); }
             set
             {
                 Model.Throttle = value;
                 //send the new elevator value
                 string path = "set /controls/engines/current-engine/throttle " + value.ToString("N5");
-                try
-                {
-                    string num = Model.ManualSend(path + " \n");
-                    if (Double.TryParse(num, out double val))
-                    {
-                        Model.Throttle = val;
-                    }
-                }
-                catch (Exception)
-                {
-                    Model.AddStatement("Failed to read Throttle value from simulator");
-                }
+                Model.PushMessage(path + " \n");
             }
         }
     }

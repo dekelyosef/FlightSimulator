@@ -9,11 +9,12 @@ namespace FlightSimulatorApp.Model
         void Connect();
         void Disconnect();
         void Start();
-        string ManualSend(string path);
+        void SendToSimulator();
         void AddStatement(string str);
 
         //flightSimulator properties
         //notification
+        string Headline { set; get; }
         string Note { set; get; }
         string NoteColor { set; get; }
         string MenuNote { set; get; }

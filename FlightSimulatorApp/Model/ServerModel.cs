@@ -1,7 +1,10 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Threading;
@@ -14,14 +17,15 @@ namespace FlightSimulatorApp.Model
         public bool stop;
         public bool wait;
         public bool isConnect;
-        private readonly object lockObj;
         public event PropertyChangedEventHandler PropertyChanged;
+        private Queue<string> messages;
 
         //mutex
         public event EventHandler LostConnection;
         private readonly Mutex mutex;
         private readonly Mutex m;
 
+        private string headline;
         private string note;
         private string menuNote;
         private string noteColor;
@@ -68,14 +72,13 @@ namespace FlightSimulatorApp.Model
             this.stop = false;
             this.client = c;
             this.isConnect = false;
-            this.lockObj = new object();
             this.mutex = new Mutex();
             this.m = new Mutex();
-            this.wait = true;
             Ip = ConfigurationManager.AppSettings["IP"].ToString();
             Port = ConfigurationManager.AppSettings["Port"].ToString();
             Latitude = -200;
             Longitude = -200;
+            messages = new Queue<string>();
         }
 
         /**
@@ -84,9 +87,6 @@ namespace FlightSimulatorApp.Model
         public void Connect()
         {
             bool invalid = false;
-
-            //clear the notification
-            // this.MenuNote = "";
 
             //checks if the given port number contains only numbers
             if (!int.TryParse(port, out int portNum))
@@ -120,13 +120,12 @@ namespace FlightSimulatorApp.Model
         public void Disconnect()
         {
             this.stop = true;
-            Boolean isDisConnect = false;
-            if (!isDisConnect)
+            if (isConnect)
             {
                 try
                 {
                     client.Disconnect();
-                    isDisConnect = true;
+                    isConnect = false;
                 }
                 catch (Exception)
                 {
@@ -137,7 +136,7 @@ namespace FlightSimulatorApp.Model
         }
 
         /**
-         * Opens new thread and start writing and reading from client
+         * Opens new thread for sending get requests and reading the values back
          * */
         public void Start()
         {
@@ -153,7 +152,7 @@ namespace FlightSimulatorApp.Model
                     string msg = "";
                     try
                     {
-                        msg = WriteAndRead(GetCommands());
+                        msg = WriteAndRead(GetCommands(), true);
                     }
                     catch (IOException)
                     {
@@ -161,6 +160,7 @@ namespace FlightSimulatorApp.Model
                         SetNoteColor("RED");
                         AddStatement("Lost connection to simulator! please re-connect...");
 
+                        this.client.Disconnect();
                         LostConnection?.Invoke(this, new EventArgs());
                     }
                     catch (Exception)
@@ -185,13 +185,13 @@ namespace FlightSimulatorApp.Model
         /**
          * Write to client and read from client
          **/
-        public string WriteAndRead(string msg)
+        public string WriteAndRead(string msg, bool wait)
         {
             //mutex
             this.mutex.WaitOne();
             this.client.Write(msg);
             //if writing to simulator the contol panel's values wait 10 sec before reading
-            if (this.wait)
+            if (wait)
             {
                 Thread.Sleep(1000);
             }
@@ -201,24 +201,115 @@ namespace FlightSimulatorApp.Model
         }
 
         /**
-         * Sends the manual input commands to the server
-         **/
-        public string ManualSend(string msg)
+        * Push new message to messages queue
+        **/
+        public void PushMessage(string message)
         {
-            lock (lockObj)
+            this.messages.Enqueue(message);
+        }
+
+        /**
+        * Get the property name according to the path
+        **/
+        private string GetPropName(string message)
+        {
+            if (message == null)
             {
-                this.wait = false;
-                string str = WriteAndRead(msg);
-                this.wait = true;
-                if (!Double.TryParse(str, out _))
-                {
-                    SetNoteColor("RED");
-                    AddStatement("Error setting the value");
-                    return null;
-                }
-                return str;
+                return null;
+            }
+            if (message.Contains("throttle"))
+            {
+                return "throttle";
+            }
+            if (message.Contains("rudder"))
+            {
+                return "rudder";
+            }
+            if (message.Contains("aileron"))
+            {
+                return "aileron";
+            }
+            if (message.Contains("elevator"))
+            {
+                return "elevator";
+            }
+
+            return null;
+        }
+
+        /**
+        * Set a property to a given value by the property name
+        **/
+        private void SetProp(double value, string propName)
+        {
+            if (propName == "throttle")
+            {
+                this.Throttle = value;
+            }
+            if (propName == "rudder")
+            {
+                this.Rudder = value;
+            }
+            if (propName == "aileron")
+            {
+                this.Aileron = value;
+            }
+            if (propName == "elevator")
+            {
+                this.Elevator = value;
             }
         }
+
+        /**
+        * Sending set messages to simulator via Thread
+        * The thread takes the messages from the messages queue
+        **/
+        public void SendToSimulator()
+        {
+            new Thread(delegate ()
+            {
+                while (!stop)
+                {
+                    //If queue is empty
+                    if (this.messages.Count == 0)
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        //Send first message in queue and send to simulator
+                        double val;
+                        string toSend = messages.Dequeue();
+                        string propName = GetPropName(toSend);
+                        string value = WriteAndRead(toSend, false);
+                        if (!Double.TryParse(value, out val))
+                        {
+                            SetNoteColor("RED");
+                            AddStatement("Error setting the " + propName + " value");
+                        }
+                        else
+                        {
+                            SetProp(val, propName);
+                        }
+                    }
+                    catch (IOException)
+                    {
+                        stop = true;
+                        SetNoteColor("RED");
+                        AddStatement("Lost connection to simulator! please re-connect...");
+
+                        this.client.Disconnect();
+                        LostConnection?.Invoke(this, new EventArgs());
+                    }
+                    catch (Exception)
+                    {
+                        SetNoteColor("RED");
+                        AddStatement("Error writing or reading from simulator");
+                    }
+                }
+            }).Start();
+        }
+        
 
         /**
          * Get the commands for sending to client
@@ -892,6 +983,10 @@ namespace FlightSimulatorApp.Model
                 if (this.userName != value)
                 {
                     this.userName = value;
+                    NotifyPropertyChanged("UserName");
+                    //Set the headline to show the name
+                    this.Headline = value + "'s Controller";
+
                 }
             }
         }
@@ -922,6 +1017,25 @@ namespace FlightSimulatorApp.Model
                 if (this.port != value)
                 {
                     this.port = value;
+                }
+            }
+        } 
+        
+        /**
+         * Headline property
+         **/
+        public string Headline
+        {
+            get { return this.headline; }
+            set
+            {
+                if (this.headline != value)
+                {
+
+                    //Format the name so that every word starts with upper case
+                    this.headline = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                    NotifyPropertyChanged("Headline");
+
                 }
             }
         }

@@ -20,6 +20,7 @@
                 <Rectangle x:Name="NotificationsBack" Canvas.Left="-470" Canvas.Top="120" Height="87" Width="600" Fill="#FFE2E8E8"/>
                 <Image x:Name="icon" Source="Resources/notification.PNG" Canvas.Left="-460" Canvas.Top ="136" />
                 <Label x:Name="NotificationsLabel" Content="Notifications " FontSize="16" Canvas.Left="-435" Canvas.Top="135" FontWeight="DemiBold"/>
+                <Label x:Name="HeadlineLabel" Content="{Binding Path=VM_Headline}" FontSize="18" FontWeight="DemiBold" Foreground="#FF645E5E" Canvas.Top="-215" Canvas.Left="-300"/>
                 <TextBlock x:Name="TheNote" Foreground="{Binding Path=VM_NoteColor}" Text="{Binding Path=VM_Note, NotifyOnTargetUpdated=True}"  FontSize="18" Canvas.Left="-430" Canvas.Top="160">
                     <TextBlock.Triggers>
                         <EventTrigger RoutedEvent="Binding.TargetUpdated">

@@ -22,7 +22,6 @@ namespace FlightSimulatorApp
         public JoystickViewModel JoystickViewModel { get; internal set; }
         public MapViewModel MapViewModel { get; internal set; }
         public SliderViewModel SliderViewModel { get; internal set; }
-        public RudderCompViewModel RudderViewModel { get; internal set; }
         public TutorialWindow TutorialWind { get; internal set; }
 
         /**
@@ -32,8 +31,6 @@ namespace FlightSimulatorApp
         {
             ControlPanelViewModel.Dispose();
             ControlPanelViewModel = null;
-            RudderViewModel.Dispose();
-            RudderViewModel = null;
             JoystickViewModel.Dispose();
             JoystickViewModel = null;
             MapViewModel.Dispose();
@@ -60,7 +57,6 @@ namespace FlightSimulatorApp
             MainMenuViewModel = new MainMenuViewModel(TheModel);
             MainWindViewModel = new MainWindowViewModel(TheModel);
             SliderViewModel = new SliderViewModel(TheModel);
-            RudderViewModel = new RudderCompViewModel(JoystickViewModel, SliderViewModel);
             MainWind = new MainWindow();
             OpenWind = new OpenWindow(first);
             TutorialWind = TutorialWindow.GetInstance();
