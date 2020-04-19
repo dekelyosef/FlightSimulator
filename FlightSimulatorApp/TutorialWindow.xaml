@@ -1,0 +1,68 @@
+﻿<Window x:Class="FlightSimulatorApp.TutorialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlightSimulatorApp" xmlns:local1="clr-namespace:FlightSimulatorApp.View"
+        mc:Ignorable="d"
+        Title="TutorialWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Storyboard x:Key="ToturialBoard">
+            <DoubleAnimation Storyboard.TargetName="mapLabel" Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="backLabel" Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="notesLabel" Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="panelLabel" Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="rudderLabel" Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="map" Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="disconnect" Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="notifications" Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="panel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0" From="0.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetName="rudder" Storyboard.TargetProperty="Opacity" BeginTime="0:0:0" Duration="0:0:0" From="0.0" To="0.0"/>
+
+
+            <DoubleAnimation Storyboard.TargetName="backLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:1" Duration="0:0:3" From="0.0" To="1.0"/>
+            <DoubleAnimation Storyboard.TargetName="disconnect" Storyboard.TargetProperty="Opacity" BeginTime="0:0:2" Duration="0:0:1" From="0.0" To="1.0" AutoReverse="True" RepeatBehavior="3x" />
+            <DoubleAnimation Storyboard.TargetName="backLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:8" Duration="0:0:0" From="1.0" To="0.0"/>
+
+            <DoubleAnimation Storyboard.TargetName="mapLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:9" Duration="0:0:3" From="0.0" To="1.0"/>
+            <DoubleAnimation Storyboard.TargetName="map" Storyboard.TargetProperty="Opacity" BeginTime="0:0:10" Duration="0:0:1" From="0.0" To="1.0" AutoReverse="True" RepeatBehavior="3x" />
+            <DoubleAnimation Storyboard.TargetName="mapLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:16" Duration="0:0:0" From="1.0" To="0.0"/>
+
+            <DoubleAnimation Storyboard.TargetName="notesLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:17" Duration="0:0:3" From="0.0" To="1.0"/>
+            <DoubleAnimation Storyboard.TargetName="notifications" Storyboard.TargetProperty="Opacity" BeginTime="0:0:18" Duration="0:0:1" From="0.0" To="1.0" AutoReverse="True" RepeatBehavior="3x" />
+            <DoubleAnimation Storyboard.TargetName="notesLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:24" Duration="0:0:0" From="1.0" To="0.0"/>
+
+            <DoubleAnimation Storyboard.TargetName="panelLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:25" Duration="0:0:3" From="0.0" To="1.0"/>
+            <DoubleAnimation Storyboard.TargetName="panel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:26" Duration="0:0:1" From="0.0" To="1.0" AutoReverse="True" RepeatBehavior="3x" />
+            <DoubleAnimation Storyboard.TargetName="panelLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:32" Duration="0:0:0" From="1.0" To="0.0"/>
+
+            <DoubleAnimation Storyboard.TargetName="rudderLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:33" Duration="0:0:3" From="0.0" To="1.0"/>
+            <DoubleAnimation Storyboard.TargetName="rudder" Storyboard.TargetProperty="Opacity" BeginTime="0:0:34" Duration="0:0:1" From="0.0" To="1.0" AutoReverse="True" RepeatBehavior="3x" />
+            <DoubleAnimation Storyboard.TargetName="rudderLabel" Storyboard.TargetProperty="Opacity" BeginTime="0:0:38" Duration="0:0:0" From="1.0" To="0.0"/>
+
+        </Storyboard>
+
+    </Window.Resources>
+    <Grid>
+        <Canvas x:Name="Base">
+            <Image x:Name="Tutorial" Source="/Resources/Controls.PNG" Height="465" Width="792" Canvas.Top="-24"/>
+            <Polygon x:Name="disconnect" Points="-95,-72 -95,-44 -4,-44 -4,-72" Canvas.Left="100" Canvas.Top="100" Stroke="Red" StrokeThickness="2"/>
+            <Label x:Name="backLabel" Content="Disconnect and go back to the menu" FontSize="16" FontWeight="SemiBold" Canvas.Left="100" Canvas.Top="27"/>
+            <Polygon x:Name="map" Points="-95,-48 -95,200 410,200 410,-48 " Canvas.Left="100" Canvas.Top="100" Stroke="Red" StrokeThickness="2"/>
+            <Label x:Name="mapLabel" Content="The pin shows the location of your craft in the world" FontSize="16" FontWeight="SemiBold" Canvas.Left="100" Canvas.Top="27"/>
+            <Polygon x:Name="notifications" Points="-95,203 -95,282 410,282 410,203 " Canvas.Left="100" Canvas.Top="100" Stroke="Red" StrokeThickness="2"/>
+            <Label x:Name="notesLabel" Content="Connection status and important notifications" FontSize="16" FontWeight="SemiBold" Canvas.Left="150" Canvas.Top="302"/>
+            <Polygon x:Name="panel" Points="415,-48 415,65 670,65 670,-48" Canvas.Left="100" Canvas.Top="100" Stroke="Red" StrokeThickness="2"/>
+            <Label x:Name="panelLabel" Content="Real time value updates from simulator" FontSize="16" FontWeight="SemiBold" Canvas.Left="470" Canvas.Top="27"/>
+            <Polygon x:Name="rudder" Points="415,75 415,270 660,270 660,75" Canvas.Left="100" Canvas.Top="100" Stroke="Red" StrokeThickness="2"/>
+            <Label x:Name="rudderLabel" Content="Control your plane using the joystick and sliders" FontSize="16" FontWeight="SemiBold" Canvas.Left="402" Canvas.Top="361"/>
+        </Canvas>
+
+        <Canvas x:Name="ButtonBase">
+            <Button x:Name="backToMenu" Width="40" Height="30" HorizontalAlignment="Left" Canvas.Top="0" Cursor="Hand" Click="BackToMenu_Click">
+                <Polygon   Stretch="Fill"  Fill="Black" Points="45,0 45,30 45,10 15,10 15,-10 0,10 15,30 15,20 45,20 45,0 15,0 15,10 45,10" />
+            </Button>
+        </Canvas>
+    </Grid>
+</Window>

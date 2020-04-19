@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="FlightSimulatorApp.View.Controls.Sliders"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightSimulatorApp.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid RenderTransformOrigin="0.472,0.599">
+        <Canvas x:Name="Base" Margin= "10,10,10,10">
+            <Canvas x:Name="SlidersBase" Margin="0">
+
+                <Label x:Name="ThrottleLabel" FontWeight="Bold" FontSize="12" Content="Throttle:" Width="72" Height="24" Canvas.Left="260" Canvas.Top="220" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-89.663"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+                <Label x:Name="ThrottleVal" FontSize="12" Content="{Binding Path=VM_Throttle}" Width="72" Height="24" Canvas.Left="261" Canvas.Top="160" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-89.663"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+
+                <Slider x:Name="ThrottleSlider" Canvas.Left="235" Canvas.Top="200" Width="165" RenderTransformOrigin="0.5,0.5" TickPlacement="BottomRight"
+                   Maximum="1" Value="{Binding Path=VM_Throttle}" Foreground="Black" TickFrequency="0.1" MouseDown="ThrottleSlider_MouseDown" MouseUp="ThrottleSlider_MouseUp" MouseMove="ThrottleSlider_MouseMove">
+                    <Slider.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90.563"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Slider.RenderTransform>
+                </Slider>
+                <Slider x:Name="AileronSlider" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="200"
+                    Minimum="-1" Maximum="1" Value="{Binding Path=VM_Aileron}" TickPlacement="BottomRight" TickFrequency="0.2" Foreground="Black" MouseDown="AileronSlider_MouseDown"
+                MouseUp="AileronSlider_MouseUp" MouseMove="AileronSlider_MouseMove" RenderTransformOrigin="0.332,-8.08" Canvas.Left="330" Canvas.Top="300"/>
+            </Canvas>
+            <Label x:Name="AileronLabel" FontWeight="Bold" FontSize="12" Content="Aileron:" Width="72" Height="24" Canvas.Left="390" Canvas.Top="320"/>
+            <Label x:Name="AileronVal" FontSize="12" Content="{Binding Path=VM_Aileron}" Width="72" Height="24" Canvas.Left="445" Canvas.Top="320"/>
+        </Canvas>
+    </Grid>
+</UserControl>

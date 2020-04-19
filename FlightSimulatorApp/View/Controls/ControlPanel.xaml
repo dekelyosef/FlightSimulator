@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="FlightSimulatorApp.View.Controls.ControlPanel"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FlightSimulatorApp.View.Controls" xmlns:viewmodel="clr-namespace:FlightSimulatorApp.ViewModel"
+             mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid x:Name="Base" Margin="0">
+
+        <Grid x:Name="ControlPanelBase" TextBlock.FontSize="16" Background="#FFD6D3D3" Margin="10,10,10,280" HorizontalAlignment="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="Heading" Grid.Column="1" Padding="5" Margin="5" Foreground="{Binding Path=VM_HeadingColor}" Content="{Binding Path=VM_Heading}" FontSize="14"/>
+            <Label Padding="5" Content="Heading:" FontSize="14" FontWeight="Bold"/>
+
+            <Label Grid.Row ="1" Padding="5" Margin="1,3,3,3" FontWeight="Bold" Content="AirSpeed:" FontSize="14"/>
+            <Label x:Name="AirSpeed" Grid.Row ="1" Grid.Column="1" Padding="5" Margin="5" Foreground="{Binding Path=VM_AirSpeedColor}" Content="{Binding Path=VM_AirSpeed}" FontSize="14"/>
+
+            <Label Grid.Row ="2" Padding="5" Margin="1,3,3,3" Content="Altitude:" FontSize="14" FontWeight="Bold"/>
+            <Label x:Name="Altitude" Grid.Row ="2" Grid.Column="1" Padding="5" Margin="5" Foreground="{Binding Path=VM_AltitudeColor}" Content="{Binding Path=VM_Altitude}" FontSize="14"/>
+
+            <Label Grid.Row ="3" Padding="5" Margin="1,3,3,3" FontWeight="Bold" Content ="Roll:" FontSize="14"/>
+            <Label x:Name="Roll" Grid.Row ="3" Grid.Column="1" Padding="5" Margin="5" Foreground="{Binding Path=VM_RollColor}" Content="{Binding Path=VM_Roll}" FontSize="14"/>
+
+            <Label Padding="5" Margin="1,3,3,3" Grid.Column="2" FontWeight="Bold" Content ="Pitch:" FontSize="14"/>
+            <Label x:Name="Pitch" Grid.Column="3" Padding="5" Margin="5" Foreground="{Binding Path=VM_PitchColor}" Content="{Binding Path=VM_Pitch}" FontSize="14"/>
+
+            <Label Grid.Row ="1" Padding="5" Margin="1,3,3,3" Grid.Column="2" FontSize="14" FontWeight="Bold" Content="Altimeter:"/>
+            <Label x:Name="Altimeter" Grid.Row ="1" Grid.Column="3" Padding="5" Margin="5" Foreground="{Binding Path=VM_AltimeterColor}" Content="{Binding Path=VM_Altimeter}" FontSize="14" />
+
+            <Label Grid.Row ="2" Padding="5" Margin="1,3,3,3" FontSize="14" Grid.Column="2" FontWeight="Bold" Content="GroundSpeed:"/>
+            <Label x:Name="GroundSpeed" Grid.Row ="2" Grid.Column="3" Padding="5" Margin="5" Foreground="{Binding Path=VM_GroundSpeedColor}" Content="{Binding Path=VM_GroundSpeed}" FontSize="14"/>
+
+            <Label Grid.Row ="3" Padding="5" Margin="1,3,3,3" Grid.Column="2" FontSize="14" FontWeight="Bold" Content="VerticalSpeed:"/>
+            <Label x:Name="VerticalSpeed" Grid.Row ="3" Grid.Column="3" Padding="5" Margin="5" Foreground="{Binding Path=VM_VerticalSpeedColor}" Content="{Binding Path=VM_VerticalSpeed}" FontSize="14"/>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

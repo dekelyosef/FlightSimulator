@@ -1,0 +1,12 @@
+Dekel Yosef 315634071
+Sarai Ahrak 204894000
+
+Bonuses embedded in our app:
+
+* Map zoom level is updated automatically according to the airplane speed
+* Correct implementation of MVVM
+* Creating Model, ViewModel and View components in App Startup.
+* Additional features  and general aesthetics:
+	- Added a "Controls" feature that explains the app controls.
+	- Using animations throughout app flow (Welcome screen, main menu, controls tutorial).
+	- Building several windows to make UI simple and clean.

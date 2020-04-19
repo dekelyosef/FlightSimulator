@@ -1,0 +1,38 @@
+﻿<Window x:Class="FlightSimulatorApp.MainWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FlightSimulatorApp" xmlns:controls="clr-namespace:FlightSimulatorApp.View.Controls"
+        mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainWindow" Background="#FFD6D3D3">
+    <Grid>
+
+
+        <Canvas x:Name="MainBase" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <controls:ControlPanel x:Name="MyControlPanel" Height="450" Canvas.Top="-195" Canvas.Left="140"/>
+            <controls:RudderComponent x:Name="RudderComp" Background="#00000000" Canvas.Left="-40" Canvas.Top="-120"/>
+            <controls:Map x:Name="WorldMap" Height="290" Width="600" Canvas.Top="-180" Canvas.Left="-470"/>
+            <Button x:Name="BackButton" Canvas.Left="-470" Canvas.Top="-210" Height="25" Width="100" Content="Disconnect" FontSize="14" Cursor="Hand" Click="BackButton_Click"/>
+
+            <Canvas x:Name="NotificationsBase">
+                <Rectangle x:Name="NotificationsBack" Canvas.Left="-470" Canvas.Top="120" Height="87" Width="600" Fill="#FFE2E8E8"/>
+                <Image x:Name="icon" Source="Resources/notification.PNG" Canvas.Left="-460" Canvas.Top ="136" />
+                <Label x:Name="NotificationsLabel" Content="Notifications " FontSize="16" Canvas.Left="-435" Canvas.Top="135" FontWeight="DemiBold"/>
+                <TextBlock x:Name="TheNote" Foreground="{Binding Path=VM_NoteColor}" Text="{Binding Path=VM_Note, NotifyOnTargetUpdated=True}"  FontSize="18" Canvas.Left="-430" Canvas.Top="160">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" From="0.0" To="1.0"/>
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0" BeginTime="0:0:5" From="1.0" To="0.0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
+            </Canvas>
+        </Canvas>
+    </Grid>
+</Window>

@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="FlightSimulatorApp.View.Controls.RudderComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightSimulatorApp.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Canvas x:Name="Base" Margin="0">
+            <Canvas x:Name="RudderBase" Margin="10, 10, 10, 10">
+                <local:Sliders x:Name="MySliders" RenderTransformOrigin="0.5,0.5" Canvas.Left="-101" Canvas.Top="78">
+                    <local:Sliders.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-20" Y="-130"/>
+                        </TransformGroup>
+                    </local:Sliders.RenderTransform>
+                </local:Sliders>
+
+            </Canvas>
+            <local:Joystick x:Name="joystick" RenderTransformOrigin="0.5,0.5" Canvas.Left="-111" Canvas.Top="72">
+                <local:Joystick.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.45" ScaleY="0.45"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="285" Y="-55"/>
+                    </TransformGroup>
+                </local:Joystick.RenderTransform>
+            </local:Joystick>
+            <Label x:Name="Rudder" Content="Rudder:" Canvas.Left="265" Canvas.Top ="82" FontSize="12" FontWeight="Bold"/>
+            <Label x:Name="Elevator" Content="Elevator:" Canvas.Left="390" Canvas.Top ="200" FontSize="12" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.663"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label x:Name="RudderVal" Content="{Binding Path=VM_Rudder}" Canvas.Left="320" Canvas.Top ="82" FontSize="12"/>
+            <Label x:Name="ElevatorVal" FontSize="12" Content="{Binding Path=VM_Elevator}" Width="72" Height="24" Canvas.Left="384.334" Canvas.Top="132.667" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-89.663"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+
+        </Canvas>
+    </Grid>
+</UserControl>

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="FlightSimulatorApp.View.Controls.Map"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FlightSimulatorApp.View.Controls"
+      mc:Ignorable="d"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+
+      d:DesignHeight="290" d:DesignWidth="600">
+    <Grid>
+        <m:Map x:Name="MyMap" CredentialsProvider="6VgyJrI4Ts2pLj7LeJt6~kqJILNa1tTa1PQA9I5LL1g~AhCOKLy_R26UzcAm1yJbYYG1cuBreqEhc1egWgq14ko1pKzujNDWI0JUneO_--uw"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"
+               Center="{Binding Path=VM_Center, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+               ZoomLevel="{Binding Path=VM_Zoom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <m:Pushpin x:Name="pin" m:MapLayer.Position="{Binding Path=VM_Location}"/>
+        </m:Map>
+    </Grid>
+
+</UserControl>
